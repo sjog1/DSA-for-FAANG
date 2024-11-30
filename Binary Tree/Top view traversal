@@ -1,0 +1,68 @@
+import java.util.*;
+
+public class Top_View {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Node root = new Node(100);
+		root.left = new Node(20);
+		root.right = new Node(200);
+		root.left.left = new Node(10);
+		root.left.right = new Node(30);
+		root.left.right.left = new Node(40);
+		root.right.left = new Node(150);	
+		//          100
+		//     20          200
+		//   10   30     150 
+		//          40
+		// Result : [10, 20, 100, 200]
+		ArrayList<Integer> result = topView(root);
+		System.out.print(result);
+	}
+
+	static ArrayList<Integer> topView(Node root)
+    {
+		//To store final result
+       ArrayList<Integer> ans = new ArrayList<>();
+       if(root == null){
+           return ans;
+       }
+       //Sorted TreeMap to store unique values traced for first time during traversal
+       Map<Integer, Integer> map_result = new TreeMap<>();
+       //Queue can be used to store pairs of nodes and their corresponding distance from root node
+       Queue<Pair> q = new LinkedList<Pair>();
+       
+       q.add(new Pair ( root, 0));
+       
+       while (!q.isEmpty()){
+           Pair current = q.poll();
+           int hd = current.hd;
+           Node temp = current.node;
+           
+           if(map_result.get(hd) == null){
+               map_result.put(hd, temp.data);
+           }
+           if(temp.left != null){
+               q.add(new Pair (temp.left, hd-1));
+           }
+           if(temp.right != null){
+               q.add(new Pair (temp.right, hd+1));
+           }
+       }
+       for (Map.Entry<Integer, Integer> entry: map_result.entrySet()){
+           ans.add(entry.getValue());
+       }
+       return ans;
+        
+    }
+}
+
+class Pair{
+    int hd;
+    Node node;
+    
+    Pair( Node node, int hd) {
+        this.hd = hd;
+        this.node = node;
+    }
+}
