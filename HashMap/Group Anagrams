@@ -1,0 +1,21 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        
+        for (String word : strs) {
+            char[] chars = word.toCharArray();
+                                      // Eg. Sort ate,tea,eat
+            Arrays.sort(chars);
+                                     //All will be sorted to aet
+            String sortedWord = new String(chars);
+            //If key doesnt exist, add the new sorted word along with creation of new arraylist
+            if (!map.containsKey(sortedWord)) {
+                map.put(sortedWord, new ArrayList<>());
+            }
+            //Now add given word at end of arraylist for specific key like aet
+            map.get(sortedWord).add(word);
+        }
+        
+        return new ArrayList<>(map.values());
+    }
+}
