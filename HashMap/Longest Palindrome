@@ -1,0 +1,23 @@
+class Solution {
+    public int longestPalindrome(String s) {
+        Map<Character, Integer> counts = new HashMap();
+                        //First store all values with their total count in hashmap
+        for(char c: s.toCharArray())
+            counts.put(c, counts.getOrDefault(c, 0) + 1);
+        
+        int result = 0;
+        boolean odd_found = false;
+                     // Check if char occurs even no of times add as it is else subtract one and then add to longest result
+        for(int c: counts.values()){
+            if(c % 2 == 0) result += c;
+            else{
+                odd_found = true;
+                result += c - 1;
+            }
+        }
+                   //Make sure to add 1 for the centre char of the aplindrome if any odd count was found
+        if(odd_found) result++;
+        return result;
+    }
+}
+//https://www.youtube.com/watch?v=J_Di2LmeLBQ&t=681s
