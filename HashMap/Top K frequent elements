@@ -16,4 +16,5 @@ class Solution {
         return ans;
     }
 }
+//There are N elements in the Heap and we call poll() K times = O(K log N) 
 //https://leetcode.com/problems/top-k-frequent-elements/solutions/350472/easy-simple-java-solution-for-interviews-heap-hashmap/ 
