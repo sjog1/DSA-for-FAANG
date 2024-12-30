@@ -1,20 +1,32 @@
 class Solution {
-    public List<Integer> topKFrequent(int[] nums, int k) {
-                     // Create a map mp, to store key-value pair, i.e. element-frequency pair.
-        Map<Integer, Integer> map = new HashMap<>();
-        for(int num : nums){ map.put(num, map.getOrDefault(num, 0) + 1); }
-                        // Store the element-frequency pair in a Priority Queue (Max Heap)
-        Queue<Integer> heap = new PriorityQueue<>((a, b) -> map.get(b) - map.get(a));
-        for(int key : map.keySet())
-        { heap.add(key); }    
-                     // Poll top k frequent elements off the Heap
-        List<Integer> ans = new ArrayList<>();                          
-        for(int i = 0; i < k; i++){
-            ans.add(heap.poll());
+   public int[] topKFrequent(int[] nums, int k) {
+        // 1. Use a Counter collection for frequency counts - this produces the same outcome as our verbose implementation in the brute force approach.
+        Map<Integer, Integer> counts = new HashMap<>();
+        for (int num : nums) {
+            counts.put(num, counts.getOrDefault(num, 0) + 1);
         }
         
-        return ans;
+        // 2. Initialize a min heap
+        PriorityQueue<Map.Entry<Integer, Integer>> minHeap = new PriorityQueue<>(k, (a, b) -> a.getValue() - b.getValue());
+        
+        for (Map.Entry<Integer, Integer> entry : counts.entrySet()) {
+        
+            // 3. Manage the heap
+            // Add each element to the heap
+            minHeap.add(entry);
+            
+            // If the size of the heap is larger than k, we pop the element at the top.
+            if (minHeap.size() > k) {
+                minHeap.poll();
+            }
+        }
+        
+        // 4. What remains in the heap are the top k most frequent
+        int[] result = new int[k];
+        for (int i = 0; i < k; i++) {
+            result[i] = minHeap.poll().getKey();
+        }
+        
+        return result;
     }
 }
-//There are N elements in the Heap and we call poll() K times = O(K log N) 
-//https://leetcode.com/problems/top-k-frequent-elements/solutions/350472/easy-simple-java-solution-for-interviews-heap-hashmap/ 
