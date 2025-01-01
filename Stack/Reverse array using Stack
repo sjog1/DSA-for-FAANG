@@ -1,0 +1,29 @@
+// Function to reverse the array elements
+    public static void reverse(int arr[], int n)
+    {
+ 
+      Stack<Integer> st = new Stack<>(); // make stack containing intergers
+ 
+      // push all elements of array into stack
+      for(int i=0 ;i<n ;i++){
+          st.push(arr[i]);
+      }
+ 
+      // to update elements of array of ith index
+      int i=0;
+      // run loop until stack not empty
+      while(st.empty()==false){
+          // get top element of stack and pop it
+          int top = st.peek();
+          st.pop();
+          // update ith index of array
+          arr[i] = top;
+          // increment i
+          i++;
+      }
+     
+      // traverse the array to print all elements
+      for(i=0 ;i<n ;i++){
+          System.out.print(arr[i]+" ");
+      }
+    }
