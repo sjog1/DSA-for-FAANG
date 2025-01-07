@@ -9,7 +9,7 @@ class Solution
      return dfs(adj,vis,0,abc);
     }
 
-    public ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> adj, int[] vis, int ele,ArrayList<Integer> abc) {
+    public ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> adj, int[] vis, int ele, ArrayList<Integer> abc) {
        vis[ele] = 1;
        abc.add(ele);
        ArrayList<Integer> temp = adj.get(ele);
