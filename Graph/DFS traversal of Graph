@@ -4,8 +4,7 @@ class Solution
     public ArrayList<Integer> dfsOfGraph(ArrayList<ArrayList<Integer>> adj) {
         // Code here
         int V = adj.size();
-        int[] vis = new int[V];
-       
+        int[] vis = new int[V];       
          ArrayList<Integer> abc = new ArrayList<>();
      return dfs(adj,vis,0,abc);
     }
@@ -15,7 +14,9 @@ class Solution
        abc.add(ele);
        ArrayList<Integer> temp = adj.get(ele);
        for(int i : temp) {
-           if(vis[i]==0) dfs(adj,vis,i,abc);
+           if(vis[i]==0) 
+       dfs(adj,vis,i,abc);
        }
-    return abc;}
+        return abc;
+    }
 }
