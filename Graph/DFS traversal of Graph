@@ -8,10 +8,10 @@ class Solution {
         dfs(0, adj, vis, ans);
         return ans;
     }
+
     public void dfs(int node, ArrayList<ArrayList<Integer>> adj, boolean[] vis, ArrayList<Integer> ans){
         ans.add(node);
-        vis[node] = true;
-        
+        vis[node] = true;        
         for(Integer it: adj.get(node)){
             if(vis[it]==false){
                 dfs(it, adj, vis, ans);
